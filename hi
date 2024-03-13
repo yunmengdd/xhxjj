@@ -1,0 +1,73 @@
+
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *nextPtr;	
+};
+struct node *createlist(struct node *headPtr)
+{
+	int num;
+	struct node *currentPtr=NULL;
+	struct node  *newPtr=NULL;
+	scanf("%d",&num);
+	while(num!=-1){
+		newPtr=(struct node*)malloc(sizeof(struct node));
+		newPtr->data=num;
+		newPtr->nextPtr=NULL;
+		if(headPtr==NULL){
+			currentPtr=newPtr;
+			headPtr=currentPtr;
+		}
+            else{
+            	currentPtr->nextPtr=newPtr;
+            	currentPtr=newPtr;
+			}		
+		scanf("%d",&num);
+	}
+	return headPtr;
+}
+int fmax(struct node *headPtr)
+{
+	struct node *p=headPtr;
+	int max=p->data;
+	while(p!=NULL){
+		if(p->data>max){
+			max=p->data;
+		}
+		p=p->nextPtr;
+	}
+	return max;
+}
+int fmin(struct node *headPtr)
+{
+	struct node *p=headPtr;
+	int min=p->data;
+	while(p!=NULL){
+		if(p->data<min){
+			min=p->data;
+		}
+		p=p->nextPtr;
+	}
+	return min;
+}
+int fsum(struct node *headPtr)
+{
+	int sum;
+	struct node *p=headPtr;
+	while(p!=NULL){
+	sum+=p->data;
+	p=p->nextPtr;
+}
+	return sum;
+}
+int main()
+{
+	int sum,max,min;
+	struct node *headPtr=NULL;
+    headPtr=createlist(headPtr);
+	max=fmax(headPtr);
+	min=fmin(headPtr);
+	sum=fsum(headPtr);
+	printf("The maximum,minmum and the total are:%d %d %d",max,min,sum);
+	return 0;
+}
